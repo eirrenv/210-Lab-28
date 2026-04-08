@@ -2,6 +2,9 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <algorithm>
+#include <random>
+#include <ctime>
 #include "Goat.h"
 using namespace std;
 
@@ -120,7 +123,7 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 or input > trp.size()) {
+    while (input < 1 || input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
