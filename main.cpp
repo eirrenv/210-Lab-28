@@ -22,6 +22,7 @@ void find_goat(list<Goat> trip); // find specific goat in list
 void youngest_goat(list<Goat> trip); // find youngest goat in list
 void oldest_goat(list<Goat> trip); // find oldest goat in list
 void shuffle_goats(list<Goat>& trip); // shuffle the list
+void remove_goat_age(list<Goat>& trip); // remove goats with a certain age
 
 int main() {
     srand(time(0));
@@ -99,7 +100,9 @@ int main() {
                 shuffle_goats(trip);
                 break;
             case 10:
-                // milestone 7
+                // milestone 7, remove goats with specific age
+                cout << "Removing goats.\n";
+                remove_goat_age(trip);
                 break;
             case 11:
                 // milestone 8
@@ -126,7 +129,7 @@ int main_menu() {
     cout << "[7] Find youngest goat in list\n";
     cout << "[8] Find oldest goat in list\n";
     cout << "[9] Shuffle goats\n";
-    cout << "[10] Milestone 7\n";
+    cout << "[10] Remove goats with specific age\n";
     cout << "[11] Milestone 8\n";
     cout << "[12] Quit\n";
     cout << "Choice --> ";
@@ -227,6 +230,7 @@ void oldest_goat(list<Goat> trp) {
 }
 
 void shuffle_goats(list<Goat>& trp) {
+
     vector<Goat> tmp(trp.begin(), trp.end());
 
     shuffle(tmp.begin(), tmp.end(), default_random_engine(time(0)));
@@ -234,4 +238,14 @@ void shuffle_goats(list<Goat>& trp) {
     trp.assign(tmp.begin(), tmp.end());
 
     cout << "Goats shuffled." << endl;
+}
+
+void remove_goat_age(list<Goat>& trp) {
+    int age;
+    cout << "Please provide an age to remove: ";
+    cin >> age;
+    
+    trp.remove_if([age](const Goat& g) { return g.get_age() == age; });
+
+    cout << "Removed goats with age " << age << endl;
 }
