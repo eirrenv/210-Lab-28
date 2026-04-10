@@ -21,6 +21,7 @@ void check_old_goat(list<Goat> trip); // check if there are any elderly goats ov
 void find_goat(list<Goat> trip); // find specific goat in list
 void youngest_goat(list<Goat> trip); // find youngest goat in list
 void oldest_goat(list<Goat> trip); // find oldest goat in list
+void shuffle_goats(list<Goat>& trip); // shuffle the list
 
 int main() {
     srand(time(0));
@@ -93,7 +94,9 @@ int main() {
                 oldest_goat(trip);
                 break;
             case 9:
-                // milestone 6
+                // milestone 6, shuffle list of goats
+                cout << "Shuffling goats.\n";
+                shuffle_goats(trip);
                 break;
             case 10:
                 // milestone 7
@@ -122,7 +125,7 @@ int main_menu() {
     cout << "[6] Find specific goat in list\n";
     cout << "[7] Find youngest goat in list\n";
     cout << "[8] Find oldest goat in list\n";
-    cout << "[9] Milestone 6\n";
+    cout << "[9] Shuffle goats\n";
     cout << "[10] Milestone 7\n";
     cout << "[11] Milestone 8\n";
     cout << "[12] Quit\n";
@@ -221,4 +224,12 @@ void oldest_goat(list<Goat> trp) {
     cout << "The oldest goat in the list is " << it->get_name() << " at "
          << it->get_age() << " year(s) old." 
          << endl;
+}
+
+void shuffle_goats(list<Goat>& trp) {
+    vector<Goat> tmp(trp.begin(), trp.end());
+
+    shuffle(tmp.begin(), tmp.end(), default_random_engine(time(0)));
+
+    trp.assign(tmp.begin(), tmp.end());
 }
