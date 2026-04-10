@@ -6,6 +6,7 @@
 #include <random>
 #include <ctime>
 #include "Goat.h"
+#include <string> // for getline
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -17,6 +18,7 @@ void display_trip(list<Goat> trip);
 int main_menu();
 
 void check_old_goat(list<Goat> trip); // check if there are any elderly goats over 15
+void find_goat(list<Goat> trip); // find specific goat in list
 
 int main() {
     srand(time(0));
@@ -49,7 +51,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 6) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -69,8 +71,29 @@ int main() {
                 trip.clear();
                 break;
             case 5:
+                // second milestone, check for any elderly goats
                 cout << "Checking for elderly goats.\n";
                 check_old_goat(trip);
+                break;
+            case 6:
+                // milestone 3, find specific goat in list
+                cout << "Finding goat.\n";
+                find_goat(trip);
+                break;
+            case 7:
+                // milestone 4
+                break;
+            case 8:
+                // milestone 5
+                break;
+            case 9:
+                // milestone 6
+                break;
+            case 10:
+                // milestone 7
+                break;
+            case 11:
+                // milestone 8
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -90,11 +113,17 @@ int main_menu() {
     cout << "[3] List goats\n";
     cout << "[4] Clear goats from list\n";
     cout << "[5] Check for elderly goats\n";
-    cout << "[6] Quit\n";
+    cout << "[6] WIP\n";
+    cout << "[7] Milestone 4\n";
+    cout << "[8] Milestone 5\n";
+    cout << "[9] Milestone 6\n";
+    cout << "[10] Milestone 7\n";
+    cout << "[11] Milestone 8\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 5) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -151,4 +180,23 @@ void check_old_goat(list<Goat> trp) {
     else {
         cout << "There are no elderly goats." << endl;
     }
+}
+
+void find_goat(list<Goat> trp) {
+    string searchGoat;
+    cout << "Please enter name of goat you want to search for: ";
+    cin.ignore();
+    getline(cin, searchGoat);
+
+    auto it = find_if(trp.begin(), trp.end(), [searchGoat](const Goat& g) {
+        return g.get_name() == searchGoat;
+    });
+
+    if (it != trp.end()) {
+        cout << searchGoat << " is in the list." << endl;
+    }
+    else {
+        cout << searchGoat << " is not in the list." << endl;
+    }
+
 }
