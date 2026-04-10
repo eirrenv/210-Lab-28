@@ -23,6 +23,7 @@ void youngest_goat(list<Goat> trip); // find youngest goat in list
 void oldest_goat(list<Goat> trip); // find oldest goat in list
 void shuffle_goats(list<Goat>& trip); // shuffle the list
 void remove_goat_age(list<Goat>& trip); // remove goats with a certain age
+void sort_list(list<Goat>& trip); // sort list by ascending age
 
 int main() {
     srand(time(0));
@@ -105,7 +106,9 @@ int main() {
                 remove_goat_age(trip);
                 break;
             case 11:
-                // milestone 8
+                // milestone 8, sort list by ascending age
+                cout << "Sorting list by ascending age.\n";
+                sort_list(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -130,7 +133,7 @@ int main_menu() {
     cout << "[8] Find oldest goat in list\n";
     cout << "[9] Shuffle goats\n";
     cout << "[10] Remove goats with specific age\n";
-    cout << "[11] Milestone 8\n";
+    cout << "[11] Sort list\n";
     cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -248,4 +251,11 @@ void remove_goat_age(list<Goat>& trp) {
     trp.remove_if([age](const Goat& g) { return g.get_age() == age; });
 
     cout << "Removed goats with age " << age << endl;
+}
+
+void sort_list(list<Goat>& trp) {
+    
+    trp.sort([](const Goat& first, const Goat& second) { return first.get_age() < second.get_age(); });
+
+    cout << "Sorted list." << endl;
 }
