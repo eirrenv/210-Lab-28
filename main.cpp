@@ -19,6 +19,8 @@ int main_menu();
 
 void check_old_goat(list<Goat> trip); // check if there are any elderly goats over 15
 void find_goat(list<Goat> trip); // find specific goat in list
+void youngest_goat(list<Goat> trip); // find youngest goat in list
+void oldest_goat(list<Goat> trip); // find oldest goat in list
 
 int main() {
     srand(time(0));
@@ -81,10 +83,12 @@ int main() {
                 find_goat(trip);
                 break;
             case 7:
-                // milestone 4
+                // milestone 4, find youngest goat in list
+                cout << "Finding youngest goat.\n";
+                youngest_goat(trip);
                 break;
             case 8:
-                // milestone 5
+                // milestone 5, find oldest goat in list
                 break;
             case 9:
                 // milestone 6
@@ -113,8 +117,8 @@ int main_menu() {
     cout << "[3] List goats\n";
     cout << "[4] Clear goats from list\n";
     cout << "[5] Check for elderly goats\n";
-    cout << "[6] WIP\n";
-    cout << "[7] Milestone 4\n";
+    cout << "[6] Find specific goat in list\n";
+    cout << "[7] Find youngest goat in list\n";
     cout << "[8] Milestone 5\n";
     cout << "[9] Milestone 6\n";
     cout << "[10] Milestone 7\n";
@@ -199,4 +203,16 @@ void find_goat(list<Goat> trp) {
         cout << searchGoat << " is not in the list." << endl;
     }
 
+}
+
+void youngest_goat(list<Goat> trp) {
+    Goat youngest = *trp.begin();
+    for (auto it = trp.begin(); it != trp.end(); ++it) {
+        if (it->get_age() < youngest.get_age()) {
+            youngest = *it;
+        }
+    }
+    cout << "The youngest goat in the list is " << youngest.get_name() << " at "
+         << youngest.get_age() << " years old." 
+         << endl;
 }
