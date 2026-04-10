@@ -89,6 +89,8 @@ int main() {
                 break;
             case 8:
                 // milestone 5, find oldest goat in list
+                cout << "Finding oldest goat.\n";
+                oldest_goat(trip);
                 break;
             case 9:
                 // milestone 6
@@ -119,7 +121,7 @@ int main_menu() {
     cout << "[5] Check for elderly goats\n";
     cout << "[6] Find specific goat in list\n";
     cout << "[7] Find youngest goat in list\n";
-    cout << "[8] Milestone 5\n";
+    cout << "[8] Find oldest goat in list\n";
     cout << "[9] Milestone 6\n";
     cout << "[10] Milestone 7\n";
     cout << "[11] Milestone 8\n";
@@ -206,13 +208,17 @@ void find_goat(list<Goat> trp) {
 }
 
 void youngest_goat(list<Goat> trp) {
-    Goat youngest = *trp.begin();
-    for (auto it = trp.begin(); it != trp.end(); ++it) {
-        if (it->get_age() < youngest.get_age()) {
-            youngest = *it;
-        }
-    }
-    cout << "The youngest goat in the list is " << youngest.get_name() << " at "
-         << youngest.get_age() << " years old." 
+    auto it = min_element(trp.begin(), trp.end(), [](const Goat& first, const Goat& second) { return first.get_age() < second.get_age(); } );
+
+    cout << "The youngest goat in the list is " << it->get_name() << " at "
+         << it->get_age() << " year(s) old." 
+         << endl;
+}
+
+void oldest_goat(list<Goat> trp) {
+    auto it = max_element(trp.begin(), trp.end(), [](const Goat& first, const Goat& second) { return first.get_age() < second.get_age(); } );
+
+    cout << "The oldest goat in the list is " << it->get_name() << " at "
+         << it->get_age() << " year(s) old." 
          << endl;
 }
