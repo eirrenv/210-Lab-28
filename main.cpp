@@ -232,4 +232,6 @@ void shuffle_goats(list<Goat>& trp) {
     shuffle(tmp.begin(), tmp.end(), default_random_engine(time(0)));
 
     trp.assign(tmp.begin(), tmp.end());
+
+    cout << "Goats shuffled." << endl;
 }
