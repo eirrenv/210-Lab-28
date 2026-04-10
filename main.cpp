@@ -16,6 +16,8 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
+void check_old_goat(list<Goat> trip); // check if there are any elderly goats over 15
+
 int main() {
     srand(time(0));
     bool again;
@@ -47,7 +49,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 6) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -66,6 +68,10 @@ int main() {
                 cout << "Clearing list.\n";
                 trip.clear();
                 break;
+            case 5:
+                cout << "Checking for elderly goats.\n";
+                check_old_goat(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -83,7 +89,8 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Clear goats from list\n";
-    cout << "[5] Quit\n";
+    cout << "[5] Check for elderly goats\n";
+    cout << "[6] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
@@ -134,4 +141,14 @@ int select_goat(list<Goat> trp) {
         cin >> input;
     }
     return input;
+}
+
+void check_old_goat(list<Goat> trp) {
+    bool isOlder = any_of(trp.begin(), trp.end(), []( const Goat& g ) { return g.get_age() > 15; } );
+    if (isOlder) {
+        cout << "There are elderly goats older than 15." << endl;
+    }
+    else {
+        cout << "There are no elderly goats." << endl;
+    }
 }
